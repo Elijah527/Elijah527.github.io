@@ -5,16 +5,17 @@
     flex-wrap:wrap;
 
 }
-.background-image {
+.banner {
     background-image: url('pics/day2/banner.webp');
-    color:white
+    color:white;
 }
-header{
+nav{
+    width: 1200px;
     display:flex;
     flex-wrap:wrap;
-    justify-content:center;
+    justify-content:space-evenly;
 }
-.navitem{
+.navitem a{
     color:white;
 }
 .col{
