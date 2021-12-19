@@ -8,6 +8,7 @@
 .banner {
     background-image: url('pics/day2/banner.webp');
     color:white;
+    height: 710px;
 }
 nav{
     width: 1200px;
@@ -17,6 +18,12 @@ nav{
 }
 .navitem a{
     color:white;
+}
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    color: aqua;
 }
 .col{
     width: 540px;
