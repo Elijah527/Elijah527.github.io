@@ -16,7 +16,7 @@ nav{
     flex-wrap:wrap;
     justify-content:space-evenly;
 }
-.navitem a{
+.banner a{
     color:white;
 }
 a:link{
@@ -32,8 +32,11 @@ a:hover{
 .content h1{
     font-size: 70px;
 }
-.bannerbutton{
+.bannerUnderlink{
+    width: 1200px;
     display: flex;
+    margin: auto;
+    justify-content:space-evenly;
 }
 .col{
     width: 540px;
