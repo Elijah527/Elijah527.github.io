@@ -9,6 +9,8 @@
     background-image: url('pics/day2/banner.webp');
     color:white;
     height: 710px;
+    display:flex;
+    flex-wrap:wrap;
 }
 nav{
     width: 1200px;
