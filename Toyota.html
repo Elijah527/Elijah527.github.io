@@ -9,24 +9,83 @@
     <style>
         body{font-family: "Microsoft JhengHei",serif,sans-serif,cursive,fantasy,monospace;}
         .body{
-            flex:wrap;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        .header{
+            display: flex;
+            width: 100%;
+            background-color: #fff;
+            justify-content:space-between ;
+            border-bottom: 5px solid darkgray;
+            position: fixed;
+            z-index: 1;
+        }
+        .logo,.links{
+            width: 15%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 15px 20px;
+        }
+        .advantage-title{
+            display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+        }
+        .advantage-title h2{
+            width: 100%;
+            font-size: 40px;
+            font-weight: bold;
+            padding-top: 96px;
+            text-align: center;
+        }
+        .selection{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            margin-top: 70px;
+        }
+        .selection-item{
+            width: 180px;
+            font-size: 18px;
+            padding: 5px 50px;
+            border: 1px dotted;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        .item-block{
+            background-color:  red;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 31px;
+            left: 0;
+            transition:0.5s;
         }
         .advantages{
             width: 1200px;
-            flex-flow: wrap column ;
-            align-content: center;
+            display: flex;
+            flex-flow: column wrap ;
+            justify-content: center;
             margin:auto;
+            position: relative;
         }
         .advantage{
-            width: 959px;
+            width: 899px;
             border: 1px solid red;
             background-color: #ccc;
+            padding: 60px;
         }
         .color_block{
             width: 440px;
             height: 300px;
             background-color: #eee;
+            position: absolute;
+            right: 0;
+            top: -30px;
         }
         .revolution{
             width: 680px;
@@ -37,10 +96,52 @@
             width: 360px;
             height: 400px;
             background-color: #cc0;
+            position: absolute;
+            top: -70px;
         }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="logo"><a href="#"><img src="https://picsum.photos/200/50/?random=3"></a></div>
+        <div class="links">
+            <div><a href="#"><img src="https://picsum.photos/80/25/?random=3"></a></div>
+            <div><a href="#"><img src="https://picsum.photos/25/25/?random=3"></a></div>
+            <div><a href="#"><img src="https://picsum.photos/25/25/?random=3"></a></div>
+            <div><a href="#"><img src="https://picsum.photos/25/25/?random=3"></a></div>
+        </div>
+    </div>
+    <div class="header"></div>
+    <div class="advantage-title">
+        <h2>五大優勢</h2>
+    </div>
+    <div class="selection">
+        <div class="selection-item">
+            <div class="item-block">
+            <span>操控樂趣</span>
+            </div>
+        </div>
+        <div class="selection-item">
+            <div class="item-block">
+            <span>安全守護</span>
+            </div>
+        </div>
+        <div class="selection-item">
+            <div class="item-block">
+            <span>乘坐舒適</span>
+            </div>
+        </div>
+        <div class="selection-item">
+            <div class="item-block">
+            <span>以人為本</span>
+            </div>
+        </div>
+        <div class="selection-item">
+            <div class="item-block">
+            <span>引以為傲</span>
+            </div>
+        </div>
+    </div>
     <div class="advantages">
         <div class="advantage advantage1">
             <div class="color_block">
