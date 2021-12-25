@@ -42,10 +42,11 @@
             text-align: center;
         }
         .selection{
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             justify-content:space-around;
-            margin-top: 70px;
+            margin: 70px auto 90px;
         }
         .selection-item{
             width: 180px;
@@ -56,6 +57,9 @@
             position: relative;
             overflow: hidden;
         }
+        .selection-item span{
+            position: relative;
+        }
         .item-block{
             background-color:  red;
             width: 100%;
@@ -65,12 +69,20 @@
             left: 0;
             transition:0.5s;
         }
+        .selection-item:hover span{
+            color: white;
+        }
+        .selection-item:hover .item-block{
+            top: 0;
+            right: 0;
+        }
+
         .advantages{
-            width: 1200px;
+            width: 960px;
             display: flex;
             flex-flow: column wrap ;
-            justify-content: center;
-            margin:auto;
+            align-content: center;
+            margin: auto;
             position: relative;
         }
         .advantage{
@@ -103,7 +115,9 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo"><a href="#"><img src="https://picsum.photos/200/50/?random=3"></a></div>
+        <div class="logo">
+            <a href="#"><img src="https://picsum.photos/200/50/?random=3"></a>
+        </div>
         <div class="links">
             <div><a href="#"><img src="https://picsum.photos/80/25/?random=3"></a></div>
             <div><a href="#"><img src="https://picsum.photos/25/25/?random=3"></a></div>
@@ -111,35 +125,34 @@
             <div><a href="#"><img src="https://picsum.photos/25/25/?random=3"></a></div>
         </div>
     </div>
-    <div class="header"></div>
     <div class="advantage-title">
         <h2>五大優勢</h2>
     </div>
     <div class="selection">
         <div class="selection-item">
-            <div class="item-block">
+            <div class="item-block"></div>
             <span>操控樂趣</span>
-            </div>
+            
         </div>
         <div class="selection-item">
-            <div class="item-block">
+            <div class="item-block"></div>
             <span>安全守護</span>
-            </div>
+            
         </div>
         <div class="selection-item">
-            <div class="item-block">
+            <div class="item-block"></div>
             <span>乘坐舒適</span>
-            </div>
+            
         </div>
         <div class="selection-item">
-            <div class="item-block">
+            <div class="item-block"></div>
             <span>以人為本</span>
-            </div>
+            
         </div>
         <div class="selection-item">
-            <div class="item-block">
+            <div class="item-block"></div>
             <span>引以為傲</span>
-            </div>
+            
         </div>
     </div>
     <div class="advantages">
