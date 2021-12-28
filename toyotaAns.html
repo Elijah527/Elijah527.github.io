@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+        }
+        .section{
+            width: 960px;
+            margin: auto;
+            padding: 40px 0px;
+            /* border: 1px solid red; */
+        }
+        .title{
+            width: 320px;
+            color: #fff;
+            background-color: #f00;
+            position: relative;
+            z-index: 3;
+        }
+        .section:nth-child(even) .title{
+            margin-left: auto;
+        }
+        .title h2{
+            font-size: 50px;
+        }
+        .title .title-txt{
+            background-color: #000;
+            padding: 20px;
+            position: absolute;
+        }
+        .video{
+            width: 700px;
+            margin-left: 200px;
+            /* border: 1px solid green; */
+            position: relative;
+            z-index: 0;
+        }
+        .section:nth-child(even) .video{
+            margin-left: 60px;
+        }
+        .video:before{
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: -40px;
+            width: 250px;
+            height: 200px;
+            background-color: #ddd;
+        }
+        .video a{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        .section:nth-child(even) .video a{
+            flex-direction: row-reverse;
+        }
+        .video .pic{
+            width: 685px;
+            margin-right: -45px;
+        }
+        .section:nth-child(even) .video .pic{
+            margin-left: -45px;
+            margin-right: auto;
+
+        }
+        .video .pic img{
+            width: 100%;
+            vertical-align: top;
+        }
+        .video .btn{
+            width: 60px;
+            height: 35px;
+            background-color: #f00;
+        }
+        .txt{
+            width: 700px;
+            background-color: #ccc;
+            padding: 10px;
+            margin-top: -1em;
+            margin-left: 100px;
+            position: relative;
+            z-index: 3;
+            box-sizing: border-box;
+        }
+        .section:nth-child(even) .txt{
+            margin-left: 160px;
+        }
+        .txt .slg{
+            color: red;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .txt .slg:after{
+            content: '';
+            display: inline-block;
+            width: 0px;
+            border-bottom: 1px solid #f00;
+            margin-left: 0.5em;
+            flex-grow: 1;
+            /* height: 1px; */
+            /* background-color: #f00; */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="section-group">
+        <section class="section">
+            <!-- 標題區 -->
+            <div class="title">
+                <h2>
+                    <span class="number">01</span>
+                    操控樂趣
+                </h2>
+                <div class="title-txt">
+                    <h3>人人滿意的駕駛體驗</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sunt.</p>
+                </div>
+            </div>
+            <!-- 影片區 -->
+            <div class="video">
+                <a href="#">
+                    <div class="pic">
+                        <img src="https://picsum.photos/300/200?random=20">
+                    </div>
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <!-- 文字區 -->
+            <div class="txt">
+                <span class="slg">因為我們做了這些革新革新革新革新</span>
+                <h3>低重心設計</h3>
+                <p>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩定性。</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用高強度鋼材，提高車輛穩定性，同時藉又雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</p>
+            </div>
+        </section>
+        <section class="section">
+            <!-- 標題區 -->
+            <div class="title">
+                <h2>
+                    <span class="number">02</span>
+                    操控樂趣
+                </h2>
+                <div class="title-txt">
+                    <h3>人人滿意的駕駛體驗</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sunt.</p>
+                </div>
+            </div>
+            <!-- 影片區 -->
+            <div class="video">
+                <a href="#">
+                    <div class="pic">
+                        <img src="https://picsum.photos/300/200?random=20">
+                    </div>
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <!-- 文字區 -->
+            <div class="txt">
+                <span class="slg">因為我們做了這些革新</span>
+                <h3>低重心設計</h3>
+                <p>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩定性。</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用高強度鋼材，提高車輛穩定性，同時藉又雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</p>
+            </div>
+        </section>
+        <section class="section">
+            <!-- 標題區 -->
+            <div class="title">
+                <h2>
+                    <span class="number">03</span>
+                    操控樂趣
+                </h2>
+                <div class="title-txt">
+                    <h3>人人滿意的駕駛體驗</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sunt.</p>
+                </div>
+            </div>
+            <!-- 影片區 -->
+            <div class="video">
+                <a href="#">
+                    <div class="pic">
+                        <img src="https://picsum.photos/300/200?random=20">
+                    </div>
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <!-- 文字區 -->
+            <div class="txt">
+                <span class="slg">因為我們做了這些革新</span>
+                <h3>低重心設計</h3>
+                <p>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩定性。</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用高強度鋼材，提高車輛穩定性，同時藉又雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</p>
+            </div>
+        </section>
+        <section class="section">
+            <!-- 標題區 -->
+            <div class="title">
+                <h2>
+                    <span class="number">04</span>
+                    操控樂趣
+                </h2>
+                <div class="title-txt">
+                    <h3>人人滿意的駕駛體驗</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, sunt.</p>
+                </div>
+            </div>
+            <!-- 影片區 -->
+            <div class="video">
+                <a href="#">
+                    <div class="pic">
+                        <img src="https://picsum.photos/300/200?random=20">
+                    </div>
+                    <div class="btn"></div>
+                </a>
+            </div>
+            <!-- 文字區 -->
+            <div class="txt">
+                <span class="slg">因為我們做了這些革新</span>
+                <h3>低重心設計</h3>
+                <p>透過低重心設計，不僅呈現更低伏的外觀，更能減少車身側傾，保持高速行駛的穩定性。</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用高強度鋼材，提高車輛穩定性，同時藉又雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕馭穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高承載強度，保持輪胎抓地力，同時兼顧轉向靈敏度與清晰路感回饋，提升駕馭樂趣。</p>
+            </div>
+        </section>
+    </div>
+
+
+    
+</body>
+</html>
