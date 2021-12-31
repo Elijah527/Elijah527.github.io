@@ -1,8 +1,8 @@
 .section{
     width: 960px;
     margin: auto;
-    /* border: 1px solid red; */
     line-height: 1.5;
+    margin-bottom: 40px;
 }
 h3{
     font-size: 24px;
@@ -19,7 +19,10 @@ h3{
     margin-left: auto;
 }
 .title h2{
+    display: flex;
+    justify-content: space-evenly;
     font-size: 52px;
+    text-align: center;
 }
 .title .title_text{
     background-color: #000;
@@ -64,13 +67,13 @@ h3{
     content: '';
     width: 200px;
     height: 200px;
-    background-color: #ccc;
+    background-color: #ebebeb;
     position: absolute;
-    top: -30px;
+    top: -50px;
     right: -60px;
 }
 .section:nth-child(even) .video::after{
-    left: -60px;
+    left: -30px;
 }
 img{
     width: 100%;
@@ -98,9 +101,14 @@ img{
 .slogon:after{
     content: '';
     width: 1px;
-    height: 4px;
+    height: 2px;
     background-color: red;
     display: inline-block;
     flex-grow: 1;
     margin-left: 0.5em;
+}
+.info h3{
+    color: white;
+    background-color: black;
+    display: inline-block;
 }
