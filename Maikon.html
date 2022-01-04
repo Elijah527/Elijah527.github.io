@@ -10,27 +10,148 @@
     <style>
         header{
             display: flex;
-            
+            height: 120px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
         }
-    body{
-        font-family: 'Roboto', sans-serif;
-    }
+        .sr-only{
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+        }
+        .nav a{
+            display: block;
+            text-decoration: none;
+            padding: 6px 10px;
+            color: #5d6678;
+        }
+        body{
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 1.6;
+            letter-spacing: 0;
+            text-align: left;
+            color: #3b3d42;
+        }
+        @media screen and (max-width:767px){
+            .nav{
+                background-color: #faf;
+                position: fixed;
+                width: 380px;
+                height: 100%;
+                top: 120px;
+                right: -100%;
+                font-size: 16px;
+                transition: 0.5s;
+            }
+            #menu-control:checked ~ header .nav{
+                right: 0;
+            }
+            .nav a + a{
+                border-bottom: 1px solid gray;
+            }
+            .hb{
+                width: 40px;
+                height: 40px;
+                background-color: #1fde82;
+                position: relative;
+            }
+            .hb span{
+                position: absolute;
+                width: 80%;
+                height: 4px;
+                background-color: #fff;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hb span:first-child{
+                margin-top: 10px;
+                transform: rotate(0deg);
+                transition: margin-top 0.3s 0.3s, transform 0.3s;
+            }
+            .hb span:nth-child(2){
+                margin: auto;
+                opacity: 1;
+                transition: opacity 0.3s 0.3s;
+            }
+            .hb span:last-child{
+                margin-bottom: 10px;
+                margin-top: auto;
+                transform: rotate(0deg);
+                transition: margin-bottom 0.3s 0.3s,transform 0.3s;
+            }
+            #menu-control:checked ~ header .hb span:first-child{
+                margin-top: 18px;
+                transform: rotate(45deg);
+                transition: margin-top 0.3s, transform 0.3s 0.3s;
+            }
+            #menu-control:checked ~ header .hb span:nth-child(2){
+                display: none;
+                transition: opacity 0.3s;
+            }
+            #menu-control:checked ~ header .hb span:last-child{
+                margin-bottom: 18px;
+                transform: rotate(-45deg);
+                transition: margin-bottom 0.3s, transform 0.3s 0.3s;
+            }
+            #menu-control{
+                position: absolute;
+                top: -20px;
+            }
+            .bnt{
+                display: none;
+            }
+        }
+        @media screen and (min-width:768px){
+            .nav{
+                display: flex;
+                width: 50%;
+                background-color:transparent;
+                justify-content: space-around;
+            }
+            .nav a{
+                display: inline-block;
+            }
+            #menu-control{
+                display: none;
+            }
+        }
+        
     </style>
 </head>
 <body>
+    <input type="checkbox" id="menu-control">
     <header>
-        <div class="logo">
-            <a href="#"><img src="/pics/maikon/logo.png" alt="maikon_logo"></a>
-        </div>
-        <nav>
-            <div class="link"><a href="#">Home</a></div>
-            <div class="link"><a href="#">About</a></div>
-            <div class="link"><a href="#">Services</a></div>
-            <div class="link"><a href="#">Team</a></div>
-            <div class="link"><a href="#">Case studio</a></div>
-            <div class="link"><a href="#">Contacts</a></div>
+        <a href="#" class="logo">
+            <h1>
+                <span class="sr-only">maikon</span>
+                <img src="/pics/maikon/logo.png" alt="maikon_logo">
+            </h1>
+        </a>
+        <label class="hb" for="menu-control">
+            <span></span><!-- 做menu-control的三條白線 -->
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Team</a>
+            <a href="#">Case studio</a>
+            <a href="#">Contacts</a>
         </nav>
-        <div class="bnt"><button id="subscb">Subscribe</button></div>
+        <div class="bnt">
+            <button id="subscb">Subscribe</button>
+        </div>
     </header>
 </body>
 </html>
