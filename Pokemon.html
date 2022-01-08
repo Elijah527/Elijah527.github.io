@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>寶可夢圖鑑列表</h1>
+    <button onclick='fetchPokemon()'>載入寶可夢圖鑑列表</button>
+    <button onclick='fetchPokemon()'>載入寶可夢圖鑑列表fetchPokemon()</button>
+    <button id="button3">載入寶可夢圖鑑列表btn3.onclick</button>
+    <button onclick='fetchPokemon_appendChild()'>載入寶可夢圖鑑列表appendChild()</button>
+    <button id="button5">載入寶可夢圖鑑列表addEventListener()</button>
+    <button id="button6">載入寶可夢圖鑑列表+1</button>
+
+    <button id='reset' onclick="resetPokemon()">Reset</button>
+
+    <div id='container'></div>
+
+    <script>
+        let container = document.getElementById('container');
+
+        window.onload = setPokemon();
+        // window.onload = fetchPokemon();
+
+        //方式1:利用Element.innerHTML設定HTML字串
+        function setPokemon() {
+            let h1 = document.getElementsByTagName('h1')[0];
+            h1.innerText="Pokemon圖鑑列表"
+
+            let fileName="001";
+            let pathFile =`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+            let pokemonImg = `<img src='${pathFile}' >`;
+
+            container.innerHTML = pokemonImg;
+
+        }
+        //方式1:for迴圈 ＋ Element.innerHTML設定HTML字串
+        function fetchPokemon() {
+            let pokemons="";
+
+            for(let i=1; i< 890; i++){
+                let fileName = i.toString().padStart(3,'0');
+                let pathFile= `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+                let pokemonImg = `<img src='${pathFile}' >`;
+                pokemons += pokemonImg;
+            }
+            container.innerHTML = pokemons;
+        }
+
+        //方式2:新增DOM元素
+        function appendPokemon() {
+            let img = document.createElement("img");
+            img.setAttribute("src","https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png");
+
+            container.appendChild(img);
+        }
+
+
+        //方式2:for迴圈 ＋ 新增DOM元素
+        function fetchPokemon_appendChild() {
+            container.innerHTML="";
+            for( let i=1 ; i< 890; i++){
+                let fileName= i.toString().padStart(3,'0');
+                let pathFile= `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+
+                let img = document.createElement("img");
+                img.setAttribute("src",`${pathFile}`);
+                container.appendChild(img);
+            }
+            
+        }
+        //將第二個Button改成 btn2.onclick寫法
+        var btn3 = document.getElementById("button3");
+        btn3.onclick = fetchPokemon_appendChild; //為甚麼不能寫成fetchPokemon_appendChild()
+
+        //將第三個Button改成 addEventListener()寫法
+        var btn5 = document.getElementById("button5");
+        btn5.addEventListener('click',fetchPokemon_appendChild);
+
+        //加一按鈕(宣告全域變數index, click後加入Dom Element, index++)
+        let j = 2;
+        let btn6 = document.getElementById("button6");
+        btn6.onclick = function addPokemon(){
+            let index = j.toString().padStart(3,'0');
+            let pathFile= `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${index}.png`;
+            let img = document.createElement("img");
+            img.setAttribute("src",`${pathFile}`);
+            container.appendChild(img);
+            j++;
+        }
+        
+
+
+        function resetPokemon() {
+            // container.innerHTML="";
+            //或(判斷是否有第一個元素,有就移除直到沒有)
+            while (container.firstChild){
+                container.removeChild(container.firstChild);
+            }
+        }
+    </script>
+</body>
+
+</html>
