@@ -14,7 +14,8 @@
     <button id="button3">載入寶可夢圖鑑列表btn3.onclick</button>
     <button onclick='fetchPokemon_appendChild()'>載入寶可夢圖鑑列表appendChild()</button>
     <button id="button5">載入寶可夢圖鑑列表addEventListener()</button>
-    <button id="button6">載入寶可夢圖鑑列表+1</button>
+    <button id="button6">寶可夢圖鑑列表+1</button>
+    <button id="button7">寶可夢圖鑑列表-1</button>
 
     <button id='reset' onclick="resetPokemon()">Reset</button>
 
@@ -23,7 +24,7 @@
     <script>
         let container = document.getElementById('container');
 
-        window.onload = setPokemon();
+        // window.onload = setPokemon();
         // window.onload = fetchPokemon();
 
         //方式1:利用Element.innerHTML設定HTML字串
@@ -82,7 +83,7 @@
         btn5.addEventListener('click',fetchPokemon_appendChild);
 
         //加一按鈕(宣告全域變數index, click後加入Dom Element, index++)
-        let j = 2;
+        let j = 1;
         let btn6 = document.getElementById("button6");
         btn6.onclick = function addPokemon(){
             let index = j.toString().padStart(3,'0');
@@ -92,7 +93,19 @@
             container.appendChild(img);
             j++;
         }
-        
+        //減一按鈕
+        let btn7 = document.getElementById("button7");
+        btn7.onclick = function removePokemon(){
+            if (j == 1){  //為甚麼用<小於時，F12裡會出現錯誤訊息
+                alert(`沒有了`);
+            }
+            else {
+                let lastItem = document.querySelector("img:last-child");
+                lastItem.remove();
+                j--; 
+            };
+            
+        }
 
 
         function resetPokemon() {
