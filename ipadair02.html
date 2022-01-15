@@ -70,14 +70,14 @@
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="64gb" value="64">
                                 <label for="64gb" class="form-selector-label">
                                     <span>64GB</span>
-                                    <!-- <span>NT$18,900起</span> -->
+                                    <span>NT$18,900起</span>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="256gb" value="256">
                                 <label for="256gb" class="form-selector-label">
                                     <span>256GB</span>
-                                    <!-- <span>NT$23,900起</span> -->
+                                    <span>NT$23,900起</span>
                                 </label>
                             </div>
                         </div>
@@ -281,22 +281,24 @@
             }
         ]
         let dimensionColor = document.querySelector('.dimension-colors');
-        let color = 'spacegray'
-        let storage = 64;
-        let connection = 'wifi';
+        let color,storage,connection;
         dimensionColor.addEventListener('change',function(colorChosed){
             color = colorChosed.target.value;
-            getprice();
+            // getprice();
+            summeryPrice();
+            // dimensionColor.classList.add('d-none');
         })
         let dimensionStorage = document.querySelector('.dimension-storage');
         dimensionStorage.addEventListener('change',function(storageChosed){
             storage = storageChosed.target.value;
-            getprice();
+            // getprice();
+            summeryPrice();
         })
         let dimensionConnection = document.querySelector('.dimension-connection');
         dimensionConnection.addEventListener('change',function(connectionChosed){
             connection = connectionChosed.target.value;
-            getprice();
+            // getprice();
+            summeryPrice();
         })
         const price = document.querySelector(".price p");
         // let getprice = document.querySelector('.getP')
@@ -307,6 +309,18 @@
             let img = document.querySelector('.image');
             img.setAttribute('src',filterArray[0].url);
         }
+        function summeryPrice(){
+            if(storage == 256 && connection == null){
+                price.innerText='NT23,900元起';
+            }
+            else if(connection == null){
+                price.innerText='NT18,900元起';
+            }
+            else{
+                getprice();
+            }
+        }
+        
     </script>
 
 </body>
