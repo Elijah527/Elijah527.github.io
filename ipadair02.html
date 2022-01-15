@@ -11,7 +11,9 @@
         .image{
             width: 100%;
         }
-        
+        .price p{
+            font-size: 40px;
+        }
     </style>
 
     <title>iPad Air</title>
@@ -68,14 +70,14 @@
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="64gb" value="64">
                                 <label for="64gb" class="form-selector-label">
                                     <span>64GB</span>
-                                    <span>NT$18,900起</span>
+                                    <!-- <span>NT$18,900起</span> -->
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="256gb" value="256">
                                 <label for="256gb" class="form-selector-label">
                                     <span>256GB</span>
-                                    <span>NT$23,900起</span>
+                                    <!-- <span>NT$23,900起</span> -->
                                 </label>
                             </div>
                         </div>
@@ -87,14 +89,14 @@
                                 <input type="radio" class="form-select-input" name="dimensionConnection" id="wifi" value="wifi">
                                 <label for="wifi" class="form-selector-label">
                                     <span>Wi-Fi</span>
-                                    <span class="wifi-fullprice">NT$xx,xxx</span>
+                                    <!-- <span class="wifi-fullprice">NT$xx,xxx</span> -->
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionConnection" id="5g" value="5g">
                                 <label for="5g" class="form-selector-label">
                                     <span>Wi-Fi+行動網路</span>
-                                    <span class="5g-fullprice">NT$xx,xxx</span>
+                                    <!-- <span class="5g-fullprice">NT$xx,xxx</span> -->
                                 </label>
                             </div>
                         </div>
@@ -301,7 +303,7 @@
         // getprice.addEventListener('click',function(){
         function getprice(){
             let filterArray = ipadArray.filter(x => x.color == color && x.storage == storage && x.connection == connection);
-            price.innerText=`NT${filterArray[0].price}元`;
+            price.innerText=`NT$${filterArray[0].price}元`;
             let img = document.querySelector('.image');
             img.setAttribute('src',filterArray[0].url);
         }
