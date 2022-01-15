@@ -14,6 +14,9 @@
         .price p{
             font-size: 40px;
         }
+        .form-selector-label span:nth-child(2){
+            font-size: 12px;
+        }
     </style>
 
     <title>iPad Air</title>
@@ -284,20 +287,17 @@
         let color,storage,connection;
         dimensionColor.addEventListener('change',function(colorChosed){
             color = colorChosed.target.value;
-            // getprice();
             summeryPrice();
             // dimensionColor.classList.add('d-none');
         })
         let dimensionStorage = document.querySelector('.dimension-storage');
         dimensionStorage.addEventListener('change',function(storageChosed){
             storage = storageChosed.target.value;
-            // getprice();
             summeryPrice();
         })
         let dimensionConnection = document.querySelector('.dimension-connection');
         dimensionConnection.addEventListener('change',function(connectionChosed){
             connection = connectionChosed.target.value;
-            // getprice();
             summeryPrice();
         })
         const price = document.querySelector(".price p");
