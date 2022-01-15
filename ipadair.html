@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        div{
+            display: block;
+        }
+        .row{
+            margin-left: auto;
+            margin-right: auto;
+            width: 980px;
+            min-height: 1000px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .column{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-width: 0;
+        }
+        .col-lg-6{
+            flex-basis: 50%;
+            max-width: 50%;
+        }
+        .rf-flagship-sticky{
+            text-align: center;
+            position: sticky;
+            top: 0;
+        }
+        .rf-flagship-media{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .rf-flagship-imgae-wrapper{
+            min-height: 300px;
+        }
+        .rf-flagship-main-imgae{
+            padding-top: 50px;
+            width: 450px;
+            height: auto;
+            opacity: 1;
+            transition: opacity 0.7s ease-in-out;
+        }
+        .col-lg-5{
+            flex-basis: 41.6666%;
+            max-width: 41.6666%;
+        }
+        .offset-lg-1{
+            margin-left: 8.3333%;
+        }
+        .rf-flagship-product-header:lang(zh){
+            letter-spacing: 0;
+        }
+        .rf-flagship-product-header{
+            padding-top: 40px;
+            font-size: 14px;
+            line-height: 1.42859;
+            font-weight: 400;
+        }
+        .rf-flagship-product-header h1{
+            font-size: 40px;
+            line-height: 1.1;
+            font-weight: 600;
+            letter-spacing: 0;
+            padding-bottom: 11px;
+        }
+        .rf-flagship-productselection{
+            padding: 40px 0 0;
+        }
+        .rf-flagship-collapsable{
+            position: relative;
+            min-height: 66px;
+            border-bottom: 1px solid #d2d2d7;
+        }
+        .rf-flagship-collapsable:first-child .rf-flagship-collapsable-header{
+            border-top: 1px solid #d2d2d7;
+        }
+        .rf-flagship-collapsable-header.r-fade-transition-exit-active, .rf-flagship-collapsable-header.r-fade-transition-exit-done{
+            transition: opacity 0.25s ease-out,transform 0.25s ease-out;
+        }
+        .rf-flagship-collapsable-header{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            transform: translateY(5px);
+        }
+        .r-fade-transition-exit-done{
+            display: none;
+        }
+        [data-core-fade-transition-wrapper]{
+            opacity: 0;
+        }
+        .rf-flagship-collapsable-header-text{
+            font-size: 24px;
+            line-height: 1.1666;
+            font-weight: 600;
+            letter-spacing: .009em;
+            padding: 20px 110px 18px 0;
+            cursor:pointer;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .rf-flagship-collapsable-header-button.as-buttonlink:lang(zh){
+            letter-spacing: 0;
+        }
+        .rf-flagship-collapsable-header-button.as-buttonlink{
+            font-size: 14px;
+            line-height: 1.4285;
+            font-weight: 400;
+        }
+        button:lang(zh){
+            font-synthesis: weight;
+        }
+        .as-buttonlink, html.touch .as-buttonlink{
+            text-decoration: none;
+        }
+        .as-buttonlink{
+            background:transparent;
+            border: 0;
+            color: #06c;
+            padding: 0;
+            vertical-align: inherit;
+            cursor:pointer;
+        }
+        .rf-flagship-collapsable-header-button{
+            text-align: right;
+            position: absolute;
+            right: 16px;
+            top: 22px;
+        }
+        .visuallyhidden{
+            position: absolute;
+            clip: rect(1px,1px,1px,1px);
+            clip-path: inset(0 0 99.9% 99.9%);
+            overflow: hidden;
+            height: 1px;
+            width: 1px;
+            padding: 0;
+            border: 0;
+        }
+        .r-height-transition-enter-done:not(.r-height-transition-enter-active) [data-core-height-transition-content], .r-height-transition-enter-done:not(.r-height-transition-enter-active)[data-core-height-transition-wrapper]{
+            overflow: visible;
+        }
+        .rf-flagship-collapsable [data-core-height-transition-wrapper]{
+            transition: height .4s ease-in-out;
+            margin: 0 -5px;
+        }
+        .r-height-transition-enter-done:not(.r-height-transition-enter-active) [data-core-height-transition-content], .r-height-transition-enter-done:not(.r-height-transition-enter-active)[data-core-height-transition-wrapper]{
+            overflow: visible;
+        }
+        .rf-flagship-collapsable [data-core-height-transition-content]{
+            padding: 0 5px;
+        }
+        .r-fade-transition-appear-active, .r-fade-transition-enter-active, .r-fade-transition-enter-done, .r-fade-transition-exit{
+            opacity: 1;
+        }
+        [data-core-fade-transition-wrapper]{
+            transition-property: opacity;
+            transition-timing-function: ease-in-out;
+            transition-duration: .4s;
+        }
+        .rf-flagship-productselection-dimension{
+            margin-top: 0;
+            padding: 0 0 26px;
+        }
+        .rf-flagship-collapsable-dimension.r-fade-transition-enter-active .rf-flagship-productselection-dimension-header, .rf-flagship-collapsable-dimension.r-fade-transition-enter-done .rf-flagship-productselection-dimension-header{
+            opacity: 1;
+            transform: translate(0);
+        }
+        .rf-flagship-collapsable:first-child .rf-flagship-productselection-dimension-header{
+            padding: 0;
+        }
+        .rf-flagship-collapsable-dimension .rf-flagship-productselection-dimension-header{
+            transition: opacity .2s ease-in-out .1s,transform .3s ease-in-out;
+        }
+        .rf-flagship-productselection-dimension-header:lang(zh){
+            letter-spacing: 0;
+        }
+        .rf-flagship-productselection-dimension-header{
+            font-size: 17px;
+            line-height: 1.4705;
+            font-weight: 600;
+        }
+        h2{
+            display: block;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        .rf-flagship-productselection-dimension-header{
+            font-size: 17px;
+            line-height: 1.4705;
+            font-weight: 600;
+        }
+        .rf-flagship-productselection-dimension .rc-dimension-selector-group{
+            margin-top: 0;
+        }
+        .form-selector-group-withgutters{
+            list-style: none;
+            width: auto;
+            margin-left: -0.4117rem;
+            margin-right: -0.4117rem;
+        }
+        .form-selector-group-withgutters .form-selector{
+            margin-top: 0.8235rem;
+            padding-left: 0.4117rem;
+            padding-right: 0.4117rem;
+        }
+        .form-selector{
+            position: relative;
+            display: flex;
+        }
+        .col-lg-6{
+            flex-basis: 50%;
+            max-width: 50%;
+        }
+    </style>
+
+    <title>iPad Air</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <!-- 左方圖片 -->
+            <div class="column col-lg-6 col-sm-12">
+                <div class="rf-flagship-sticky">
+                    <div class="rf-flagship-media">
+                        <div class="rf-flagship-imgae-wrapper">
+                            <img class="rf-flagship-main-imgae" src="https://picsum.photos/470/556/?random=10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右方表格 -->
+            <div class="column col-lg-5 offset-lg-1 col-sm-12">
+                <div data-analytics-section="hero">
+                    <div class="rf-flagship-product-header">
+                        <div>
+                            <h1 class="fwl">購買 iPad Air</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="rf-flagship-productselection">
+                    <div class="rf-flagship-collapsable" data-analytics-section="dimensionColor">
+                        <div class="rf-flagship-collapsable-header r-fade-transition-exit-done" aria-hidden="true" data-core-height-transition-wrapper>
+                            <div class="rf-flagship-collapsable-header-text" arria-hidden="true">銀色</div>
+                            <button type="button" class="as-buttonlink rf-flagship-collapsable-header-button">"更改"<span class="visuallyhidden">"("<span class="fwl selection-title">外觀</span>" 銀色 Selected)"</span></button>
+                        </div>
+                        <div class="r-height-transition-enter-done" data-core-height-transition-wrapper>
+                            <div data-core-height-transition-content>
+                                <div class="rf-flagship-collapsable-dimension r-fade-transition-enter-done">
+                                    <div class="rc-dimension rf-flagship-productselection-dimension rf-flagship-productselection-dimensioncolor">
+                                        <legend>
+                                            <h2 class="rf-flagship-productselection-dimension-header">
+                                                <span class="fwl selection-title">外觀</span>
+                                            </h2>
+                                        </legend>
+                                        <div class="rc-dimension-selector-group row form-selector-group-withgutters">
+                                            <div class="rc-dimension-mutiple form-selector-swatch column col-lg-6 col-sm-6 form-selector">
+                                                <input type="radio" class="form-select-input" name="dimensionColor" id="space_gray" data-autom="dimensionColorspace_gray" value="space_gray">
+                                                <label for="space_gray" class="form-selector-label">
+                                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-im…mp;hei=102&amp;fmt=png-alpha&amp;.v=1552422652805" alt="" class="form-selector-swatch">
+                                                    <span class="form-label-small"></span>
+                                                    <span class="form-label-small">太空灰色</span>
+                                                </label>
+                                            </div>
+                                            <div class="rc-dimension-mutiple form-selector-swatch column col-lg-6 col-sm-6 form-selector">
+                                                <input type="radio" class="form-select-input" name="dimensionColor" id="space_gray" data-autom="dimensionColorspace_gray" value="space_gray">
+                                                <label for="space_gray" class="form-selector-label">
+                                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-im…mp;hei=102&amp;fmt=png-alpha&amp;.v=1552422655664" alt="" class="form-selector-swatch">
+                                                    <span class="form-label-small"></span>
+                                                    <span class="form-label-small">銀色</span>
+                                                </label>
+                                            </div>
+                                            <div class="rc-dimension-mutiple form-selector-swatch column col-lg-6 col-sm-6 form-selector">
+                                                <input type="radio" class="form-select-input" name="dimensionColor" id="space_gray" data-autom="dimensionColorspace_gray" value="space_gray">
+                                                <label for="space_gray" class="form-selector-label">
+                                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-im…=102&amp;fmt=jpeg&amp;qlt=95&amp;.v=1599240136000" alt="" class="form-selector-swatch">
+                                                    <span class="form-label-small"></span>
+                                                    <span class="form-label-small">綠色</span>
+                                                </label>
+                                            </div>
+                                            <div class="rc-dimension-mutiple form-selector-swatch column col-lg-6 col-sm-6 form-selector">
+                                                <input type="radio" class="form-select-input" name="dimensionColor" id="space_gray" data-autom="dimensionColorspace_gray" value="space_gray">
+                                                <label for="space_gray" class="form-selector-label">
+                                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-im…=102&amp;fmt=jpeg&amp;qlt=95&amp;.v=1599240136000
+                                                    " alt="" class="form-selector-swatch">
+                                                    <span class="form-label-small"></span>
+                                                    <span class="form-label-small">玫瑰金色</span>
+                                                </label>
+                                            </div>
+                                            <div class="rc-dimension-mutiple form-selector-swatch column col-lg-6 col-sm-6 form-selector">
+                                                <input type="radio" class="form-select-input" name="dimensionColor" id="space_gray" data-autom="dimensionColorspace_gray" value="space_gray">
+                                                <label for="space_gray" class="form-selector-label">
+                                                    <img src="https://store.storeimages.cdn-apple.com/8756/as-im…mp;hei=102&amp;fmt=png-alpha&amp;.v=1599240136000" alt="" class="form-selector-swatch">
+                                                    <span class="form-label-small"></span>
+                                                    <span class="form-label-small">天藍色</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rf-flagship-collapsable" data-analytics-section="dimensionCapacity"></div>
+                    <div class="rf-flagship-collapsable rf-flagship-collapsable-disabled" data-analytics-section="dimensionConnection"></div>
+                </div>
+                <div class="rf-flagship-engraving"></div>
+                <div class="rf-flagship-summary-wrapper"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
