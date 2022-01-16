@@ -310,11 +310,18 @@
             let img = document.querySelector('.image');
             img.setAttribute('src',filterArray[0].url);
         }
+        function getColor(){
+            let filterArray = ipadArray.filter(x => x.color == color);
+            let img = document.querySelector('.image');
+            img.setAttribute('src',filterArray[0].url);
+        }
         function summeryPrice(){
             if(storage == 256 && connection == null){
+                getColor();
                 price.innerText='NT23,900元起';
             }
             else if(connection == null){
+                getColor();
                 price.innerText='NT18,900元起';
             }
             else{
