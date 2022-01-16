@@ -350,9 +350,7 @@
             h2Connect.innerText = '連線能力';
         })
 
-        const price = document.querySelector(".price p");
-        // let getprice = document.querySelector('.getP')
-        // getprice.addEventListener('click',function(){
+        const price = document.querySelector(".price p");        
         function getprice(){
             let filterArray = ipadArray.filter(x => x.color == color && x.storage == storage && x.connection == connection);
             price.innerText=`NT$${filterArray[0].price}元`;
