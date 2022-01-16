@@ -42,53 +42,55 @@
                     <div class="dimension">
                         <div class="dimension-header d-flex justify-content-between">
                             <h2 id="colorh2">外觀</h2>
-                            <button id="colorButton" class="invisible">更改</button>
+                            <button id="colorButton" class="d-none btn btn-link">更改</button>
                         </div>
                         <div class="dimension-colors">
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionColor" id="spacegray" value="spacegray">
+                                <input type="radio" class="form-select-input" name="dimensionColor" id="spacegray" value="太空灰">
                                 <label for="spacegray" class="form-selector-label">太空灰</label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionColor" id="silver" value="silver">
+                                <input type="radio" class="form-select-input" name="dimensionColor" id="silver" value="銀色">
                                 <label for="silver" class="form-selector-label">銀色</label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionColor" id="green" value="green">
+                                <input type="radio" class="form-select-input" name="dimensionColor" id="green" value="綠色">
                                 <label for="green" class="form-selector-label">綠色</label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionColor" id="gold" value="gold">
+                                <input type="radio" class="form-select-input" name="dimensionColor" id="gold" value="玫瑰金">
                                 <label for="gold" class="form-selector-label">玫瑰金</label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionColor" id="blue" value="blue">
+                                <input type="radio" class="form-select-input" name="dimensionColor" id="blue" value="天空藍">
                                 <label for="blue" class="form-selector-label">天空藍</label>
                             </div>
                         </div>
-                        <div class="dimension-storage">
-                            <div class="dimension-header">
-                                <h2>儲存裝置</h2>
+                        <div class="dimension-header d-flex justify-content-between">
+                            <h2 id="storageh2">儲存裝置</h2>
+                            <button id="storageButton" class="d-none btn btn-link">更改</button>
                             </div>
+                        <div class="dimension-storage">
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionStorage" id="64" value="64">
+                                <input type="radio" class="form-select-input" name="dimensionStorage" id="64" value="64GB">
                                 <label for="64gb" class="form-selector-label">
                                     <span>64GB</span>
                                     <span>NT$18,900起</span>
                                 </label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionStorage" id="256" value="256">
+                                <input type="radio" class="form-select-input" name="dimensionStorage" id="256" value="256GB">
                                 <label for="256gb" class="form-selector-label">
                                     <span>256GB</span>
                                     <span>NT$23,900起</span>
                                 </label>
                             </div>
                         </div>
+                        <div class="dimension-header d-flex justify-content-between">
+                            <h2 id="connecth2">連線能力</h2>
+                            <button id="connectButton" class="d-none btn btn-link">更改</button>
+                        </div>
                         <div class="dimension-connection">
-                            <div class="dimension-header">
-                                <h2>連線能力</h2>
-                            </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionConnection" id="wifi" value="wifi">
                                 <label for="wifi" class="form-selector-label">
@@ -287,36 +289,57 @@
         
         let color,storage,connection;
         //顏色選擇區
-        
-        
+        let btnColor = document.querySelector('#colorButton');
+        let h2Color = document.querySelector('#colorh2');
         let dimensionColor = document.querySelector('.dimension-colors');
         dimensionColor.addEventListener('change',function(colorChosed){
             color = colorChosed.target.id;
             summeryPrice();
-            // dimensionColor.classList.add('invisible');
-            // let btnColor = document.querySelector('#colorButton');
-            // btnColor.classList.remove('invisible');
-            // let h2Color = document.querySelector('#colorh2');
-            // h2Color.innerText = colorChosed.target.name;
+            //選擇後消失
+            dimensionColor.classList.add('d-none');
+            btnColor.classList.remove('d-none');
+            h2Color.innerText = colorChosed.target.value;
         })
         //容量選擇區
+        let btnStorage = document.querySelector('#storageButton');
+        let h2Storage = document.querySelector('#storageh2');
         let dimensionStorage = document.querySelector('.dimension-storage');
         dimensionStorage.addEventListener('change',function(storageChosed){
             storage = storageChosed.target.id;
             summeryPrice();
+            //選擇後消失
+            dimensionStorage.classList.add('d-none');
+            btnStorage.classList.remove('d-none');
+            h2Storage.innerText = storageChosed.target.value;
         })
         //連線方式選擇區
+        let btnConnect = document.querySelector('#connectButton');
+        let h2Connect = document.querySelector('#connecth2');
         let dimensionConnection = document.querySelector('.dimension-connection');
         dimensionConnection.addEventListener('change',function(connectionChosed){
             connection = connectionChosed.target.id;
             summeryPrice();
+            //選擇後消失
+            dimensionConnection.classList.add('d-none');
+            btnConnect.classList.remove('d-none');
+            h2Connect.innerText = connectionChosed.target.value;
         })
-        // btnColor.addEventListener('click',function(){
-        //     dimensionColor.classList.remove('invisible');
-        //     btnColor.classList.add('invisible');
-        //     h2Color.innerText = '外觀';
-        // })
-
+        //更改按鈕
+        btnColor.addEventListener('click',function(){
+            dimensionColor.classList.remove('d-none');
+            btnColor.classList.add('d-none');
+            h2Color.innerText = '外觀';
+        })
+        btnStorage.addEventListener('click',function(){
+            dimensionStorage.classList.remove('d-none');
+            btnStorage.classList.add('d-none');
+            h2Storage.innerText = '儲存裝置';
+        })
+        btnConnect.addEventListener('click',function(){
+            dimensionConnection.classList.remove('d-none');
+            btnConnect.classList.add('d-none');
+            h2Connect.innerText = '連線能力';
+        })
 
         const price = document.querySelector(".price p");
         // let getprice = document.querySelector('.getP')
