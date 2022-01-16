@@ -14,12 +14,18 @@
         .price p{
             font-size: 40px;
         }
-        .form-selector-label span:nth-child(2){
+        .form-selector-label span:nth-child(3){
             font-size: 12px;
         }
-        /* .form-selector-label{
-            border: 1px solid gray;
-        } */
+        .form-selector-label{
+            width: 200px; 
+            margin: 20px 10px; 
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        input{
+            display: none;
+        }
     </style>
 
     <title>iPad Air</title>
@@ -47,44 +53,44 @@
                             <h2 id="colorh2">外觀</h2>
                             <button id="colorButton" class="d-none btn btn-link">更改</button>
                         </div>
-                        <div class="dimension-colors d-flex">
+                        <div class="dimension-colors d-flex flex-wrap">
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionColor" id="spacegray" value="太空灰">
-                                <label for="spacegray" class="form-selector-label">太空灰</label>
+                                <label for="spacegray" class="form-selector-label border border-secondary rounded text-center"><img src="/pics/ipadair/finish-spacegray-201903.png" style="width:25px"><br>太空灰</label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionColor" id="silver" value="銀色">
-                                <label for="silver" class="form-selector-label">銀色</label>
+                                <label for="silver" class="form-selector-label border border-secondary rounded text-center"><img src="/pics/ipadair/finish-silver-201903.png" style="width:25px"><br>銀色</label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionColor" id="green" value="綠色">
-                                <label for="green" class="form-selector-label">綠色</label>
+                                <label for="green" class="form-selector-label border border-secondary rounded text-center"><img src="/pics/ipadair/finish-green-202009.jpg" style="width:25px"><br>綠色</label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionColor" id="gold" value="玫瑰金">
-                                <label for="gold" class="form-selector-label">玫瑰金</label>
+                                <label for="gold" class="form-selector-label border border-secondary rounded text-center"><img src="/pics/ipadair/finish-gold-202009.jpg" style="width:25px"><br>玫瑰金</label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionColor" id="blue" value="天空藍">
-                                <label for="blue" class="form-selector-label">天空藍</label>
+                                <label for="blue" class="form-selector-label border border-secondary rounded text-center"><img src="/pics/ipadair/finish-blue-202009.png" style="width:25px"><br>天空藍</label>
                             </div>
                         </div>
                         <div class="dimension-header d-flex justify-content-between">
                             <h2 id="storageh2">儲存裝置</h2>
                             <button id="storageButton" class="d-none btn btn-link">更改</button>
                             </div>
-                        <div class="dimension-storage">
+                        <div class="dimension-storage d-flex flex-wrap">
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="64" value="64GB">
-                                <label for="64gb" class="form-selector-label">
-                                    <span>64GB</span>
+                                <label for="64" class="form-selector-label border border-secondary rounded text-center">
+                                    <span>64GB</span><br>
                                     <span>NT$18,900起</span>
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionStorage" id="256" value="256GB">
-                                <label for="256gb" class="form-selector-label">
-                                    <span>256GB</span>
+                                <label for="256" class="form-selector-label border border-secondary rounded text-center">
+                                    <span>256GB</span><br>
                                     <span>NT$23,900起</span>
                                 </label>
                             </div>
@@ -93,17 +99,17 @@
                             <h2 id="connecth2">連線能力</h2>
                             <button id="connectButton" class="d-none btn btn-link">更改</button>
                         </div>
-                        <div class="dimension-connection">
+                        <div class="dimension-connection d-flex flex-wrap">
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionConnection" id="wifi" value="wifi">
-                                <label for="wifi" class="form-selector-label">
+                                <label for="wifi" class="form-selector-label border border-secondary rounded text-center">
                                     <span>Wi-Fi</span>
                                     <!-- <span class="wifi-fullprice">NT$xx,xxx</span> -->
                                 </label>
                             </div>
                             <div>
                                 <input type="radio" class="form-select-input" name="dimensionConnection" id="5g" value="5g">
-                                <label for="5g" class="form-selector-label">
+                                <label for="5g" class="form-selector-label border border-secondary rounded text-center">
                                     <span>Wi-Fi+行動網路</span>
                                     <!-- <span class="5g-fullprice">NT$xx,xxx</span> -->
                                 </label>
