@@ -34,15 +34,15 @@
                 </div>
             </div>
             <!-- 右方表格 -->
-            <div class="column col-lg-6 col-sm-12">
+            <div class="column col-lg-6 col-sm-12 mt-5">
                 <div class="product-header">
                     <h1>購買 iPad Air</h1>
                 </div>
                 <div class="productselection">
                     <div class="dimension">
                         <div class="dimension-header d-flex justify-content-between">
-                            <h2>外觀</h2>
-                            <button id="colorButton" class="d-none">更改</button>
+                            <h2 id="colorh2">外觀</h2>
+                            <button id="colorButton" class="invisible">更改</button>
                         </div>
                         <div class="dimension-colors">
                             <div>
@@ -71,14 +71,14 @@
                                 <h2>儲存裝置</h2>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionStorage" id="64gb" value="64">
+                                <input type="radio" class="form-select-input" name="dimensionStorage" id="64" value="64">
                                 <label for="64gb" class="form-selector-label">
                                     <span>64GB</span>
                                     <span>NT$18,900起</span>
                                 </label>
                             </div>
                             <div>
-                                <input type="radio" class="form-select-input" name="dimensionStorage" id="256gb" value="256">
+                                <input type="radio" class="form-select-input" name="dimensionStorage" id="256" value="256">
                                 <label for="256gb" class="form-selector-label">
                                     <span>256GB</span>
                                     <span>NT$23,900起</span>
@@ -284,23 +284,40 @@
                 "url":"/pics/ipadair/ipad-air-select-blue-202009.png"
             }
         ]
-        let dimensionColor = document.querySelector('.dimension-colors');
+        
         let color,storage,connection;
+        //顏色選擇區
+        
+        
+        let dimensionColor = document.querySelector('.dimension-colors');
         dimensionColor.addEventListener('change',function(colorChosed){
-            color = colorChosed.target.value;
+            color = colorChosed.target.id;
             summeryPrice();
-            // dimensionColor.classList.add('d-none');
+            // dimensionColor.classList.add('invisible');
+            // let btnColor = document.querySelector('#colorButton');
+            // btnColor.classList.remove('invisible');
+            // let h2Color = document.querySelector('#colorh2');
+            // h2Color.innerText = colorChosed.target.name;
         })
+        //容量選擇區
         let dimensionStorage = document.querySelector('.dimension-storage');
         dimensionStorage.addEventListener('change',function(storageChosed){
-            storage = storageChosed.target.value;
+            storage = storageChosed.target.id;
             summeryPrice();
         })
+        //連線方式選擇區
         let dimensionConnection = document.querySelector('.dimension-connection');
         dimensionConnection.addEventListener('change',function(connectionChosed){
-            connection = connectionChosed.target.value;
+            connection = connectionChosed.target.id;
             summeryPrice();
         })
+        // btnColor.addEventListener('click',function(){
+        //     dimensionColor.classList.remove('invisible');
+        //     btnColor.classList.add('invisible');
+        //     h2Color.innerText = '外觀';
+        // })
+
+
         const price = document.querySelector(".price p");
         // let getprice = document.querySelector('.getP')
         // getprice.addEventListener('click',function(){
@@ -328,7 +345,6 @@
                 getprice();
             }
         }
-        
     </script>
 
 </body>
