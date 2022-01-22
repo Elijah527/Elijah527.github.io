@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>calculator</title>
+    <style>
+        .container {
+            width: 460px;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        #btn0 {
+            width: 203px;
+        }
+
+        .display {
+            width: 97%;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="display">
+                <p class="fs-1 text-end m-auto"></p>
+            </div>
+        </div>
+
+        <!-- <div class="row mb-3">
+            <button type="button" id="btnstart" class="col-4 btn btn-outline-primary mb-3">開始</button>
+            <div>
+                <input type="text" class="col-3">
+            </div>
+        </div> -->
+        <div class="row m-auto">
+            <div>
+                <button id="btnclear" type="button" class="btn btn-dark my-2">AC</button>
+                <button id="btnsign" type="button" class="btn btn-dark my-2">+/-</button>
+                <button id="btnpercent" type="button" class="btncal btn btn-dark my-2">%</button>
+                <button id="btndivided" type="button" class="btncal btn btn-dark my-2">/</button>
+                <button id="btn7" type="button" class="btn0to9 btn btn-dark my-2" value="7">7</button>
+                <button id="btn8" type="button" class="btn0to9 btn btn-dark my-2" value="8">8</button>
+                <button id="btn9" type="button" class="btn0to9 btn btn-dark my-2" value="9">9</button>
+                <button id="btnmultiply" type="button" class="btncal btn btn-dark my-2">x</button>
+                <button id="btn4" type="button" class="btn0to9 btn btn-dark my-2" value="4">4</button>
+                <button id="btn5" type="button" class="btn0to9 btn btn-dark my-2" value="5">5</button>
+                <button id="btn6" type="button" class="btn0to9 btn btn-dark my-2" value="6">6</button>
+                <button id="btnminus" type="button" class="btncal btn btn-dark my-2">-</button>
+                <button id="btn1" type="button" class="btn0to9 btn btn-dark my-2" value="1">1</button>
+                <button id="btn2" type="button" class="btn0to9 btn btn-dark my-2" value="2">2</button>
+                <button id="btn3" type="button" class="btn0to9 btn btn-dark my-2" value="3">3</button>
+                <button id="btnplus" type="button" class="btncal btn btn-dark my-2">+</button>
+                <button id="btn0" type="button" class="btn0to9 btn btn-dark my-2" value="0">0</button>
+                <button id="btndot" type="button" class="btn0to9 btn btn-dark my-2">.</button>
+                <button id="btnequals" type="button" class="btn btn-dark my-2">=</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+        let p = document.querySelector('p');
+        let btn0to9 = document.querySelectorAll('.btn0to9');
+        let btncal = document.querySelectorAll('.btncal'); //+-*/%
+        let btnClear = document.querySelector('#btnclear');
+        let btnEquals = document.querySelector('#btnequals'); //=
+        let a, b, operator, result;
+
+        p.innerText = "0";
+
+        btn0to9.forEach(btn => btn.addEventListener('click', setInput));
+        btncal.forEach(btn => btn.addEventListener('click', setOperator));
+        btnEquals.addEventListener('click', getAsn);
+        btnClear.addEventListener('click', dataClear);
+
+        // function setb(){
+        //     if (a != null && operator != null){
+        //         p.innerText="";
+        //     }
+        // }
+
+        function setInput(event) {
+            if (event.target.innerText == 0 && p.innerText == "0") {
+                return null;
+            } else if (event.target.innerText == "." && !p.innerText.includes(".")) {
+                p.innerText += event.target.innerText;
+                setTimeout(() => { p.innerText = parseFloat(p.innerText) }, 2000)
+            } else {
+                p.innerText += event.target.innerText;
+                p.innerText = parseFloat(p.innerText)
+            };
+        }
+
+        function setOperator(event) {
+            if (a == null) {
+                a = p.innerText;
+                operator = event.target.innerText;
+                p.innerText = ""
+            } else if ( a != null && b == null){
+                b = p.innerText;
+                getAsn();
+            } else {
+                operator = event.target.innerText;
+            }
+        }
+
+        function getAsn() {
+            if (result == null){
+                b = p.innerText;
+                calculate();
+            }else {
+                a = result;
+                calculate();
+            }
+                
+        }
+
+        function calculate(){
+            switch (operator) {
+                    case "+":
+                        p.innerText = parseFloat(a) + parseFloat(b);
+                        result = p.innerText;
+                        break;
+                    case "-":
+                        p.innerText = parseFloat(a) - parseFloat(b);
+                        result = p.innerText;
+                        break;
+                    case "x":
+                        p.innerText = parseFloat(a) * parseFloat(b);
+                        result = p.innerText;
+                        break;
+                    default:
+                        p.innerText = parseFloat(a) / parseFloat(b);
+                        result = p.innerText;
+                }
+        }
+
+        function dataClear() {
+            p.innerText = "0";
+            operator = null;
+            a = null;
+            b = null;
+            result = null;
+        }
+
+    </script>
+
+</body>
+
+</html>
