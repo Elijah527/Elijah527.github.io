@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>LOL champion</title>
+    <style>
+        .card {
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .headshot {
+            overflow: hidden;
+        }
+
+        .card-title {
+            color: white;
+            background-color: black;
+            display: inline-block;
+            border-radius: 5px;
+            padding: 5px 15px 5px 15px;
+        }
+        .card-text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            /*省略第n行後的文字*/
+            -webkit-box-orient: vertical;
+            /*設定元素是垂直布局*/
+        }
+
+        .card-body {
+            background-color: #a3a3a3;
+        }
+
+        .card:hover {
+            box-shadow: 8px 8px 15px #808080;
+            transform: translate(5px, 5px);
+        }
+
+        .card:hover img {
+            transform: scale(1.2);
+            transition: transform 0.5s;
+        }
+
+        .card:not(:hover) img {
+            transform: scale(1, 1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-body {
+            background-color: rgb(240, 238, 111) !important;
+        }
+
+        .card:hover .card-title {
+            color: black;
+            background-color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container-fluid'>
+        <div class='jumbotron'>
+            <h1>LOL Champions</h1>
+        </div>
+        <div class='row'>
+        </div>
+    </div>
+
+    <template class="cardchampion">
+        <div class="card g-1" style="width: 18rem;">
+            <img src="" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <a href="#" id="btn-script" class="btn btn-primary" data-toggle="modal" data-target="#scriptModal">描述</a>
+                <a href="#" id="btn-movie" class="btn btn-danger" data-toggle="modal" data-target="#movieModal">影片</a>
+            </div>
+        </div>
+    </template>
+
+    <!-- Modal-script -->
+    <div class="modal fade" id="scriptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="championImg" class="card-img-top">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal-movie -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+        
+        
+    
+    <script>
+        let champions,cpdata
+        let cpArray=[]
+    </script>
+
+    <script type="module">
+        import { $gg ,$ce} from './modules/helpers.js'
+        let url="https://raw.githubusercontent.com/Elijah527/FileStorage/main/champion.json";
+        const row = $gg('.row')
+        const card = $gg('.cardchampion')
+        window.onload = function(){
+            
+            loadChampionData();
+        }
+        
+        function loadChampionData(){
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function (){
+                champions = JSON.parse(this.responseText).data;
+                cpdata = Object.values(champions);
+                console.log(cpdata)
+                cpdata.forEach((champion,index) => {
+                    row.append(getCard(champion,index));
+                });
+
+            }
+
+            xhr.open('GET',url);
+            xhr.send();
+        }
+        function getCard(item,sn){
+            let cloneCard = card.content.cloneNode(true);
+            cloneCard.querySelector('img').src = `https://cdngarenanow-a.akamaihd.net/webmain/static/pss/lol/items_splash/${item.id.toLowerCase()}_0.jpg`;
+            cloneCard.querySelector('.card-title').innerText = `${sn+1} : ${item.id}-${item.name}`;
+            cloneCard.querySelector('.card-text').innerText = `${item.blurb}`;
+            cloneCard.querySelector('#btn-script').addEventListener('click',function(){
+                let modal = $gg('#scriptModal');
+                modal.querySelector('.modal-title').innerText = `${item.name} - ${item.title}`;
+                modal.querySelector('img').src = `https://cdngarenanow-a.akamaihd.net/webmain/static/pss/lol/items_splash/${item.id.toLowerCase()}_0.jpg`;
+                modal.querySelector('p').innerHTML = `Armor:${item.stats.armor}<br>Attackrange:${item.stats.attackrange}<br>Hp:${item.stats.hp}<br> MoveSpeed${item.stats.movespeed}<br>SpellBlock${item.stats.spellblock}`;
+                bootstrap.Modal.getOrCreateInstance(modal).show();
+            });
+            cloneCard.querySelector('#btn-movie').addEventListener('click',function(){
+                let modal = $gg('#movieModal');
+                modal.querySelector('.modal-body').innerHTML = `<iframe width="100%" height="315" src="https://www.youtube.com/embed/oyj1ov7w-Qo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                bootstrap.Modal.getOrCreateInstance(modal).show();
+            })
+
+
+            return cloneCard;
+        }
+
+    </script>
+</body>
+
+</html>
