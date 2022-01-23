@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>calendar</title>
+</head>
+
+<body>
+    <div class="container">
+        <button id="btn-LM" class="btn btn-primary">上月</button>
+        <button id="btn-NM" class="btn btn-primary">下月</button>
+        <h1 class="d-inline-block">xxxx年xx月</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- 新增modal -->
+    <div id="addModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">新增</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="addModDate" class="col-form-label">日期</label>
+                            <input id="addModDate" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addModTitle" class="col-form-label">主旨</label>
+                            <input id="addModTitle" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="addModToDo" class="col-form-label">內容</label>
+                            <textarea class="form-control" id="addModToDo" cols="20" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addToDo()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 編輯modal -->
+    <div id="editModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">編輯</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="editModDate" class="col-form-label">日期</label>
+                            <input id="editModDate" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editModTitle" class="col-form-label">主旨</label>
+                            <input id="editModTitle" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editModToDo" class="col-form-label">內容</label>
+                            <textarea class="form-control" id="editModToDo" cols="20" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        onclick="deleteToDo()">刪除</button>
+                    <button type="button" class="btn btn-primary" onclick="editToDo()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = today.getMonth();
+        let date = today.getDate();
+        let tbody = document.querySelector('tbody');
+        let addModal = document.querySelector('#addModal');
+        let editModal = document.querySelector('#editModal');
+        let addMDate = document.querySelector('#addModDate');
+        let addMTitle = document.querySelector('#addModTitle');
+        let addMToDo = document.querySelector('#addModToDo');
+        let editMDate = document.querySelector('#editModDate');
+        let editMTitle = document.querySelector('#editModTitle');
+        let editMToDo = document.querySelector('#editModToDo');
+        let currentTodoIndex;
+        document.querySelector('#btn-LM').addEventListener('click', lastMonth);
+        document.querySelector('#btn-NM').addEventListener('click', nextMonth);
+
+        window.onload = function () {
+            init();
+        }
+        function init() {
+            tbody.innerHTML = "";
+            let h1 = document.querySelector('h1');
+            h1.innerText = `${year}年${month + 1}月`;
+            let day = 1;
+            let nextMd = 1;
+            let daysOfMonth = new Date(year, month + 1, 0).getDate();
+            let firstDay = new Date(year, month, 1).getDay();
+            //上下月
+            let daysOfLastM = new Date(year, month, 0).getDate();
+            let firstWeekLMday = daysOfLastM - firstDay + 1;
+            //生出table
+            for (row = 0; row < Math.ceil((daysOfMonth + firstDay) / 7); row++) {
+                let tr = document.createElement('tr');
+                for (col = 0; col < 7; col++) {
+                    let td = document.createElement('td');
+                    if (row == 0 && col < firstDay) {
+                        //上個月
+                        td.innerText = firstWeekLMday;
+                        firstWeekLMday++;
+                    } else {
+                        if (day <= daysOfMonth) {
+                            //這個月
+                            //列出幾號
+                            td.innerText = day;
+                            //列出事件
+                            if (localStorage.getItem(`${year}-${month + 1}-${day}`) != null) {
+                                let ul = document.createElement('ul');
+                                let todoList = JSON.parse(localStorage.getItem(`${year}-${month + 1}-${day}`));
+                                todoList.forEach((item, index) => {
+                                    let li = document.createElement('li');
+                                    li.innerText = item.Title;
+                                    //點擊li時叫出editModal
+                                    li.onclick = function (event) {
+                                        bootstrap.Modal.getOrCreateInstance(editModal).show();
+                                        currentTodoIndex = index;
+                                        editMDate.value = `${year}-${month + 1}-${td.childNodes[0].data}`;
+                                        editMTitle.value = item.Title;
+                                        editMToDo.value = item.Detail;
+
+                                        event.stopPropagation();
+                                    }
+
+                                    ul.appendChild(li);
+                                })
+                                td.appendChild(ul);
+                            }
+                            //呼叫addModal
+                            td.addEventListener('click', function () {
+                                bootstrap.Modal.getOrCreateInstance(addModal).show();
+                                addMDate.value = `${year}-${month + 1}-${td.childNodes[0].data}`;
+                            })
+                        } else {
+                            //下個月
+                            td.innerText = nextMd;
+                            nextMd++;
+                        } day++;
+                    }
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+        }
+
+        function lastMonth() {
+            month--;
+            if (month == -1) {
+                month = 11;
+                year--;
+            }
+            init();
+        }
+        function nextMonth() {
+            month++;
+            if (month == 12) {
+                month = 0;
+                year++;
+            }
+            init();
+        }
+        //新增事件
+        function addToDo() {
+            let date = addMDate.value;
+            let title = addMTitle.value;
+            let todo = addMToDo.value;
+            if (title != "" && todo != "") {
+                let todoObj = {
+                    Title: title,
+                    Detail: todo
+                };
+                let todoList = [];
+                if (localStorage.getItem(date) == null) {
+                    //當天沒事件
+                    todoList.push(todoObj);
+                } else {
+                    //當天已有事件
+                    todoList = JSON.parse(localStorage.getItem(date));
+                    todoList.push(todoObj);
+                };
+                localStorage.setItem(date, JSON.stringify(todoList));
+                bootstrap.Modal.getOrCreateInstance(addModal).hide();
+                init();
+            } else {
+                alert("請輸入內容");
+            };
+        }
+        // 修改事件
+        function editToDo() {
+            let date = editMDate.value;
+            let title = editMTitle.value;
+            let todo = editMToDo.value;
+            let todoObj = {
+                Title: title,
+                Detail: todo
+            };
+            let todoList = JSON.parse(localStorage.getItem(date));
+            todoList[currentTodoIndex] = todoObj;
+            localStorage.setItem(date, JSON.stringify(todoList));
+            bootstrap.Modal.getOrCreateInstance(editModal).hide();
+            init();
+        }
+        //刪除事件
+        function deleteToDo() {
+            let date = editMDate.value;
+            let todoList = JSON.parse(localStorage.getItem(date));
+            //array.splice(要插入或刪除的索引位置, 要刪除的元素數量, 要插入的元素內容)
+            todoList.splice(currentTodoIndex, 1);
+            localStorage.setItem(date, JSON.stringify(todoList));
+            bootstrap.Modal.getOrCreateInstance(editModal).hide();
+            init();
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
