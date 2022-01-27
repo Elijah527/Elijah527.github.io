@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Fetch JSON</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Fetch JSON 動態生成City & District下拉式選單</h1>
+        <div>
+            <select id='cities' name='cities'>
+            </select>
+        
+            <select id='district' name='district'>
+            </select>
+        
+            <input type="submit" value="提交資料" onclick="submitData()" disabled>
+        </div>
+        <div id="msg"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const jsonUrl = 'https://raw.githubusercontent.com/apprunner/FileStorage/master/TaiwanAddress.json';
+        const newZipUrl = 'https://raw.githubusercontent.com/Elijah527/FileStorage/main/TaiwanAddress_Simple.json';
+        let zipcodeArray;
+        let newZipCodeArray=[];
+        let citySelect,districtSelect,submit,divMsg
+        
+
+    </script>
+
+    <script type="module">
+        import { $gg, $ce} from '../modules/helpers.js';
+        citySelect = $gg('#cities');
+        districtSelect = $gg('#district');
+        submit = $gg("input[type=submit]");
+        divMsg = $gg('#msg');
+        
+
+        window.onload = function(){
+            getAddressJSON();
+            createSelect();
+        }
+        //#region 將原來的郵遞區號JSON轉成簡短版
+        function getAddressJSON(){
+            fetch(jsonUrl)
+            .then(response => response.json())
+            .then(result => {
+                zipcodeArray = result;
+                TransformData();
+            })
+            .catch(ex =>{
+                console.log(ex);
+            })
+            .finally()
+        }
+
+        function TransformData(){
+            zipcodeArray.forEach(city => {
+                let _city = city.CityName;
+                let _districts = [];
+                city.AreaList.forEach(area =>{
+                    _districts.push({ District:area.AreaName , ZipCode:area.ZipCode})
+                })
+                let cityObject = { City:_city , Districts:_districts};
+                newZipCodeArray.push(cityObject);
+            })
+            let newZipText= JSON.stringify(newZipCodeArray);
+        }
+        //#endregion
+
+        function createSelect(){
+            //建立預設選項
+            let option1 = $ce('option');
+            option1.value = "";
+            option1.text = "---請選擇縣市---";
+            option1.setAttribute('selected','');
+            citySelect.add(option1);
+            let option2 = $ce('option');
+            option2.value = "";
+            option2.text = "---請選擇行政區---";
+            option2.setAttribute('selected','');
+            districtSelect.add(option2);
+            districtSelect.setAttribute('disabled',true)
+            //動態生成citySelect選項
+            fetch(newZipUrl)
+            .then(newrps => newrps.json())
+            .then(data =>{
+                newZipCodeArray = data;
+                for(let i = 0; i < newZipCodeArray.length; i++){
+                    let op = $ce('option');
+                    op.valut = newZipCodeArray[i].City;
+                    op.text = newZipCodeArray[i].City;
+                    citySelect.add(op,null);
+                }
+            })
+            .catch(ex =>{
+                console.log(ex);
+            })
+            .finally();
+        }
+
+        citySelect.onchange = creatDistrictSelect;
+        districtSelect.onchange = () => submit.removeAttribute('disabled');
+        let selectedCityValue,selectedCityText;
+        function creatDistrictSelect(event){
+            selectedCityValue = citySelect.selectedOptions[0].value;
+            districtSelect.length = 1;
+            let districtArray = newZipCodeArray.find(x=>x.City==selectedCityValue).Districts;
+            
+            districtArray.forEach(dtc => {
+                let op = $ce('option');
+                op.value = dtc.District;
+                op.text = dtc.ZipCode + dtc.District;
+                districtSelect.add(op,null);
+                
+            })
+            districtSelect.removeAttribute('disabled')
+            
+        }
+
+        submit.onclick = function sendData(){
+            let formdata = new FormData();
+            formdata.append('city',citySelect.selectedOptions[0].value);
+            formdata.append('district',districtSelect.selectedOptions[0].value);
+            let request = new XMLHttpRequest();
+            request.open('POST','https://www.codemagic.com.tw');
+            request.send(formdata);
+        }
+
+    </script>
+
+</body>
+
+</html>
