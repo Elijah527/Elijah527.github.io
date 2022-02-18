@@ -93,20 +93,24 @@
 
 
         function setInput(event) {
+            if (p.innerText == "0" && a == null ){
+                p.innerText = ""
+            }
+
             if (event.target.innerText == 0 && p.innerText == "0") {
                 return null;
             } else if (event.target.innerText == "." && !p.innerText.includes(".")) {
                 p.innerText += event.target.innerText;
-                setTimeout(() => { p.innerText = parseFloat(p.innerText) }, 2000)
+                // setTimeout(() => { p.innerText = parseFloat(p.innerText) }, 2000)
             } else {
                 p.innerText += event.target.innerText;
-                p.innerText = parseFloat(p.innerText)
+                // p.innerText = parseFloat(p.innerText)
             };
         }
 
         function setOperator(event) {
             if (a == null) {
-                a = p.innerText;
+                a = parseFloat(p.innerText);
                 operator = event.target.innerText;
                 p.innerText = ""
             } else if ( a != null && b == null){
