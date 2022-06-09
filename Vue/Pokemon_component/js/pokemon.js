@@ -28,7 +28,7 @@ const app = new Vue({
                 genus: ''
             }
         },
-        //儲存頁面有幾個寶可夢
+        //儲存頁面目前有幾個寶可夢
         pageSetting: {
             index: 0
         }
