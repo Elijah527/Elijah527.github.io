@@ -19,7 +19,7 @@
         var isIOS = iOS();
         var button = document.createElement("Button");
         button.innerHTML = "上一頁";
-        button.style = "margin‑top:5%;left:10%;position:absolute;"
+        button.style = "margin‑top:0%;left:10%;position:absolute;"
         //document.body.appendChild(button);
         function iOS() {
             return ['iPad Simulator',
@@ -33,7 +33,7 @@
         $(document).ready(function () {
             $("span").html(userAgent);
             if (isIOS){
-                $("span").append(button);
+                $("p").after(button);
             }
         })
 
