@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>偵測瀏覽器</h1>
+    <p>你使用的瀏覽器是:<span></span></p>
+
+    <script>
+        var userAgent = navigator.userAgent;
+        $(document).ready(function () {
+            $("span").html(userAgent)
+        })
+
+        var button = document.createElement("Button");
+        button.innerHTML = "上一頁";
+        button.style = "margin‑top:0%;left:10%;position:absolute;"
+        document.body.appendChild(button);
+    </script>
+</body>
+
+</html>
