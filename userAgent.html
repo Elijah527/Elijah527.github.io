@@ -16,14 +16,28 @@
 
     <script>
         var userAgent = navigator.userAgent;
-        $(document).ready(function () {
-            $("span").html(userAgent)
-        })
-
+        var isIOS = iOS();
         var button = document.createElement("Button");
         button.innerHTML = "上一頁";
         button.style = "margin‑top:0%;left:10%;position:absolute;"
-        document.body.appendChild(button);
+        //document.body.appendChild(button);
+        function iOS() {
+            return ['iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'].includes(navigator.platform)
+        };
+
+        $(document).ready(function () {
+            $("span").html(userAgent);
+            if (isIOS){
+                $("p").append(button);
+            }
+        })
+
+        
     </script>
 </body>
 
