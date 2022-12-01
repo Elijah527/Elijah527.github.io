@@ -21,18 +21,20 @@
         button.innerHTML = "上一頁";
         button.style = "margin‑top:0%;left:10%;position:absolute;"
         //document.body.appendChild(button);
-        function iOS() {
-            return ['iPad Simulator',
-                'iPhone Simulator',
-                'iPod Simulator',
-                'iPad',
-                'iPhone',
-                'iPod'].includes(navigator.platform)
-        };
+        // function iOS() {
+        //     return ['iPad Simulator',
+        //         'iPhone Simulator',
+        //         'iPod Simulator',
+        //         'iPad',
+        //         'iPhone',
+        //         'iPod'].includes(navigator.platform)
+        // };
+        var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1; // android
+        var isiOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios
 
         $(document).ready(function () {
             $("span").html(userAgent);
-            if (isIOS){
+            if (document.referrer != '' && (isAndroid || isiOS)){
                 $("p").after(button);
             }
         })
